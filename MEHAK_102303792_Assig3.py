@@ -50,3 +50,5 @@ y_test_pred = X_test_bias @ best_beta
 print("\nFinal Model Performance using Best Beta:")
 print(f"Train R2 Score: {r2_score(y_train, y_train_pred):.4f}")
 print(f"Test R2 Score: {r2_score(y_test, y_test_pred):.4f}")
+
+
