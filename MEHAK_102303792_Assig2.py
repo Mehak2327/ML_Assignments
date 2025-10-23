@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -65,3 +64,4 @@ print("Cosine:", cos_sim)
 # Correlation
 corr, p = pearsonr(df['CommuteDistance'], df['YearlyIncome'])
 print("Correlation:", corr, "P-value:", p)
+
