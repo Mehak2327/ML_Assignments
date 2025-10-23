@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -89,3 +88,4 @@ weather_df.to_csv("weather.csv", index=False)
 print(f"Weather dataset exported ({len(weather_df)} records) → weather.csv\n")
 
 print("Data extraction completed for all tasks.")
+
