@@ -124,82 +124,101 @@ from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 
+# -------------------------------
+# (1) Load dataset from URL
+# -------------------------------
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data"
-col_names = ["symboling", "normalized_losses", "make", "fuel_type", "aspiration","num_doors",
-             "body_style", "drive_wheels", "engine_location", "wheel_base", "length", "width",
-             "height", "curb_weight", "engine_type", "num_cylinders", "engine_size", "fuel_system",
-             "bore", "stroke", "compression_ratio", "horsepower", "peak_rpm", "city_mpg",
-             "highway_mpg", "price"]
+columns = ["symboling", "normalized_losses", "make", "fuel_type", "aspiration", "num_doors",
+           "body_style", "drive_wheels", "engine_location", "wheel_base", "length", "width",
+           "height", "curb_weight", "engine_type", "num_cylinders", "engine_size", "fuel_system",
+           "bore", "stroke", "compression_ratio", "horsepower", "peak_rpm", "city_mpg",
+           "highway_mpg", "price"]
 
-df = pd.read_csv(url, names=col_names, na_values='?')
-df = df.dropna(subset=['price'])
+cars = pd.read_csv(url, names=columns, na_values='?')
+
+# -------------------------------
+# (2) Replace '?' with NaN already handled; 
+#     Impute missing numeric & categorical values
+# -------------------------------
+cars = cars.dropna(subset=['price'])
 
 numeric_cols = ["symboling", "normalized_losses", "wheel_base", "length", "width", "height",
                 "curb_weight", "engine_size", "bore", "stroke", "compression_ratio", "horsepower",
                 "peak_rpm", "city_mpg", "highway_mpg", "price"]
 
 for col in numeric_cols:
-    df[col] = pd.to_numeric(df[col], errors='coerce')
+    cars[col] = pd.to_numeric(cars[col], errors='coerce')
 
 num_imputer = SimpleImputer(strategy='mean')
-df[numeric_cols] = num_imputer.fit_transform(df[numeric_cols])
-cat_cols = [c for c in df.columns if c not in numeric_cols]
+cars[numeric_cols] = num_imputer.fit_transform(cars[numeric_cols])
+
+cat_cols = [c for c in cars.columns if c not in numeric_cols]
 cat_imputer = SimpleImputer(strategy='most_frequent')
-df[cat_cols] = cat_imputer.fit_transform(df[cat_cols])
+cars[cat_cols] = cat_imputer.fit_transform(cars[cat_cols])
 
+# -------------------------------
+# (3) Encode non-numeric columns as per instructions
+# -------------------------------
+
+# (i) Convert 'num_doors' and 'num_cylinders' words to numbers
 word_to_num = {'one':1, 'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'eight':8}
-def wordnum_map(x):
-    try:
-        return word_to_num[str(x).strip().lower()]
-    except:
-        try:
-            return int(x)
-        except:
-            return np.nan
+cars['num_doors'] = cars['num_doors'].map(lambda x: word_to_num.get(str(x).lower(), np.nan))
+cars['num_cylinders'] = cars['num_cylinders'].map(lambda x: word_to_num.get(str(x).lower(), np.nan))
+cars['num_doors'].fillna(cars['num_doors'].median(), inplace=True)
+cars['num_cylinders'].fillna(cars['num_cylinders'].median(), inplace=True)
 
-df['num_doors'] = df['num_doors'].apply(wordnum_map)
-df['num_cylinders'] = df['num_cylinders'].apply(wordnum_map)
-df['num_doors'] = df['num_doors'].fillna(df['num_doors'].median())
-df['num_cylinders'] = df['num_cylinders'].fillna(df['num_cylinders'].median())
+# (ii) Dummy encode 'body_style' and 'drive_wheels'
+cars = pd.get_dummies(cars, columns=['body_style', 'drive_wheels'], drop_first=True)
 
-df = pd.get_dummies(df, columns=['body_style', 'drive_wheels'], drop_first=True)
-
-label_cols = ['make', 'aspiration', 'engine_location', 'fuel_type']
-for col in label_cols:
+# (iii) Label encode 'make', 'aspiration', 'engine_location', 'fuel_type'
+for col in ['make', 'aspiration', 'engine_location', 'fuel_type']:
     le = LabelEncoder()
-    df[col] = le.fit_transform(df[col])
+    cars[col] = le.fit_transform(cars[col])
 
-df['fuel_system'] = df['fuel_system'].astype(str).str.lower().apply(lambda s: 1 if 'pfi' in s else 0)
-df['engine_type'] = df['engine_type'].astype(str).str.lower().apply(lambda s: 1 if 'ohc' in s else 0)
+# (iv) Replace 'fuel_system' values containing "pfi" with 1, else 0
+cars['fuel_system'] = cars['fuel_system'].astype(str).str.contains('pfi', case=False).astype(int)
 
-y = df['price'].values.astype(float)
-X = df.drop(columns=['price']).values.astype(float)
+# (v) Replace 'engine_type' values containing "ohc" with 1, else 0
+cars['engine_type'] = cars['engine_type'].astype(str).str.contains('ohc', case=False).astype(int)
+
+# -------------------------------
+# (4) Divide data into input features and target variable; 
+#     then scale input features
+# -------------------------------
+y = cars['price'].astype(float).values
+X = cars.drop('price', axis=1).astype(float).values
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+# -------------------------------
+# (5) Train Linear Regression model on 70% training, test on 30%
+# -------------------------------
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.30, random_state=42)
-lr = LinearRegression()
-lr.fit(X_train, y_train)
-y_pred = lr.predict(X_test)
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
 r2_before_pca = r2_score(y_test, y_pred)
-print(f"R2 before PCA: {r2_before_pca:.4f}")
+print(f"R² before PCA: {r2_before_pca:.4f}")
 
-pca = PCA(n_components=0.95, svd_solver='full')
+# -------------------------------
+# (6) Apply PCA for dimensionality reduction and retrain model
+# -------------------------------
+pca = PCA(n_components=0.95)
 X_reduced = pca.fit_transform(X_scaled)
 print("Original feature count:", X_scaled.shape[1])
 print("Reduced feature count:", X_reduced.shape[1])
 
-X_train_r, X_test_r, y_train_r, y_test_r = train_test_split(X_reduced, y, test_size=0.30, random_state=42)
-lr2 = LinearRegression()
-lr2.fit(X_train_r, y_train_r)
-y_pred_r = lr2.predict(X_test_r)
-r2_after_pca = r2_score(y_test_r, y_pred_r)
-print(f"R2 after PCA: {r2_after_pca:.4f}")
+Xp_train, Xp_test, yp_train, yp_test = train_test_split(X_reduced, y, test_size=0.30, random_state=42)
+model_pca = LinearRegression()
+model_pca.fit(Xp_train, yp_train)
+yp_pred = model_pca.predict(Xp_test)
+r2_after_pca = r2_score(yp_test, yp_pred)
+print(f"R² after PCA: {r2_after_pca:.4f}")
 
 if r2_after_pca > r2_before_pca:
-    print("PCA improved performance.")
+    print("→ PCA improved the model performance.")
 else:
-    print("PCA did not improve performance.")
+    print("→ PCA did not improve model performance.")
 
 
 
