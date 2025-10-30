@@ -122,6 +122,3 @@ Mehak
 B.Tech – Computer Engineering (3rd Year)
 📍 Thapar Institute of Engineering and Technology
 📧 mehakjindal6789@gmail.com
-Mehak Sharma
-B.Tech – Computer Engineering (3rd Year)
-📍 [Your College Name]
