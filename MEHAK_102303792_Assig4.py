@@ -44,7 +44,11 @@ chrome_opts.add_argument("--headless")
 chrome_opts.add_argument("--disable-gpu")
 chrome_opts.add_argument("--no-sandbox")
 
-driver = webdriver.Chrome(options=chrome_opts)
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_opts)
+
 driver.get("https://www.imdb.com/chart/top/")
 time.sleep(3)
 
