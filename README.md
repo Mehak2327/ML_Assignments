@@ -116,7 +116,7 @@ This repository contains a collection of **8 Machine Learning assignments** comp
 **Mehak**  
 B.Tech – Computer Engineering (3rd Year)  
 **Thapar Institute of Engineering and Technology**  
-📧 *mehakjindal6789@gmail.com*
+📧 *mmehak2_be23@thapar.edu*
 
 ---
 
