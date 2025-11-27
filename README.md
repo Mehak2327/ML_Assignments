@@ -59,7 +59,6 @@ This repository contains a collection of **8 Machine Learning assignments** comp
 - Linear vs Ridge vs Lasso comparison
 - RidgeCV & LassoCV on Boston Dataset
 - Hitters Dataset regression evaluation and best model justification  
-📄 Assignment reference: :contentReference[oaicite:0]{index=0}
 
 ---
 
@@ -68,7 +67,6 @@ This repository contains a collection of **8 Machine Learning assignments** comp
 **Key Tasks:**
 - Gaussian Naive Bayes – manual & in-built implementation
 - GridSearchCV for best K in KNN
-📄 Assignment reference: :contentReference[oaicite:1]{index=1}
 
 ---
 
@@ -79,7 +77,7 @@ This repository contains a collection of **8 Machine Learning assignments** comp
 - Metrics: Accuracy, Precision, Recall, F1-score
 - Confusion Matrix visualization
 - Effect of feature scaling on SVM performance
-📄 Assignment reference: :contentReference[oaicite:2]{index=2}
+
 
 ---
 
@@ -92,8 +90,6 @@ This repository contains a collection of **8 Machine Learning assignments** comp
    - UCI Heart dataset with hypertuning of estimators & learning rate
 3. **WISDM Smartphone & Watch Motion Sensor Dataset**
    - Accelerometer windowing, feature extraction, manual AdaBoost vs sklearn AdaBoost
-
-📄 Assignment reference: :contentReference[oaicite:3]{index=3}
 
 ---
 
