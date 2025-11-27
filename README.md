@@ -1,124 +1,130 @@
-📘 INTRODUCTION
+# 📘 MACHINE LEARNING ASSIGNMENTS – UML501  
+### Mehak | B.Tech COE (TIET)
 
-This repository contains a collection of Machine Learning assignments completed as part of the coursework requirements.
-Each assignment demonstrates the application of theoretical concepts through Python-based implementations, emphasizing fundamental understanding, analytical thinking, and hands-on practice of ML techniques.
+This repository contains a collection of **8 Machine Learning assignments** completed as part of coursework. Each assignment includes hands-on implementation of ML algorithms, reinforcing both theoretical knowledge and practical programming skills using Python.
 
-📂 ASSIGNMENT DETAILS
-Assignment 1 – NumPy Operations and Matrix Computations
+---
 
-Objective:
-To gain familiarity with the NumPy library and perform fundamental array and matrix operations.
+## 📂 **Assignment Overview**
 
-Key Tasks:
+### **Assignment 1 – NumPy Operations & Matrix Computations**
+**Objective:** Introduction to numerical computing using NumPy  
+**Key Tasks:**
+- Array creation, slicing, reshaping, flattening
+- Matrix operations (addition, multiplication, inverse, determinant, eigenvalues)
+- Statistical measures (mean, median, SD, covariance, percentiles)
+- Image-to-array conversion & file handling
 
-Array creation, slicing, and flattening
+---
 
-Matrix addition, multiplication, inverse, determinant, and eigenvalue computation
+### **Assignment 2 – Data Preprocessing Techniques**
+**Objective:** Clean and transform raw data for ML models  
+**Key Tasks:**
+- Handling missing values & noise removal
+- Normalization & standardization
+- Binning & discretization
+- One-hot encoding, ordinal encoding
+- Similarity & correlation metrics (Jaccard, Cosine, Pearson, Simple Matching)
+**Dataset:** Bike Buyers Dataset (synthetic equivalent)
 
-Statistical operations (mean, median, standard deviation, percentiles)
+---
 
-Image-to-array conversion and file handling
+### **Assignment 3 – Regression Models & PCA**
+**Objective:** Compare analytical & iterative regression training  
+**Key Tasks:**
+- Linear Regression using Normal Equation + Gradient Descent
+- 5-Fold Cross Validation evaluation
+- Model performance comparison via R² score
+- PCA for dimensionality reduction (before vs after comparison)
 
-Assignment 2 – Data Preprocessing Techniques
+---
 
-Objective:
-To perform preprocessing operations on raw data and prepare it for machine learning models.
+### **Assignment 4 – Web Scraping & Data Extraction**
+**Objective:** Collect real-world structured data  
+**Key Tasks:**
+- Static scraping using BeautifulSoup
+- Dynamic scraping using Selenium
+- Extracted data from:
+  - BooksToScrape
+  - IMDb Top 250 Movies
+  - TimeAndDate Global weather reports
+- Export to CSV for analysis
 
-Key Tasks:
+---
 
-Handling missing data using imputers
+### **Assignment 5 – Ridge & Lasso Regression + Cross Validation**
+**Objective:** Regularized regression & model selection  
+**Key Tasks:**
+- Ridge Regression using Gradient Descent (with tuning of α & LR)
+- Linear vs Ridge vs Lasso comparison
+- RidgeCV & LassoCV on Boston Dataset
+- Hitters Dataset regression evaluation and best model justification  
+📄 Assignment reference: :contentReference[oaicite:0]{index=0}
 
-Normalization and standardization
+---
 
-Discretization using binning
+### **Assignment 6 – Naïve Bayes & GridSearchCV**
+**Objective:** Bayesian modeling and hyperparameter tuning  
+**Key Tasks:**
+- Gaussian Naive Bayes – manual & in-built implementation
+- GridSearchCV for best K in KNN
+📄 Assignment reference: :contentReference[oaicite:1]{index=1}
 
-One-hot encoding and ordinal mapping
+---
 
-Similarity and correlation computation (Simple Matching, Jaccard, Cosine, Pearson)
+### **Assignment 7 – Support Vector Machines**
+**Objective:** Classification using different SVM kernels  
+**Key Tasks:**
+- SVC with Linear / Polynomial / RBF kernels
+- Metrics: Accuracy, Precision, Recall, F1-score
+- Confusion Matrix visualization
+- Effect of feature scaling on SVM performance
+📄 Assignment reference: :contentReference[oaicite:2]{index=2}
 
-Dataset Used:
-Adventure Works - Bike Buyers Dataset (Synthetic Equivalent Generated)
+---
 
-Assignment 3 – Regression Models and Dimensionality Reduction
+### **Assignment 8 – AdaBoost (Text, Medical & Sensor Data)**
+**Objective:** Boosting for stronger ensemble models  
+**Parts Implemented:**
+1. **SMS Spam Classification**
+   - TF-IDF vectorization + manual AdaBoost (T=15) + sklearn AdaBoost
+2. **Heart Disease Prediction**
+   - UCI Heart dataset with hypertuning of estimators & learning rate
+3. **WISDM Smartphone & Watch Motion Sensor Dataset**
+   - Accelerometer windowing, feature extraction, manual AdaBoost vs sklearn AdaBoost
 
-Objective:
-To implement and evaluate linear regression models using analytical and iterative approaches and apply PCA for feature reduction.
+📄 Assignment reference: :contentReference[oaicite:3]{index=3}
 
-Key Tasks:
+---
 
-Implementation of Linear Regression using:
+## 🧠 **Learning Outcomes**
+- Hands-on implementation of ML algorithms (regression, boosting, SVM, Naïve Bayes)
+- Understanding preprocessing, regularization & model evaluation
+- Experience with sensor, medical & text datasets
+- Practical ML pipeline skills (EDA → preprocessing → model → metrics)
+- Data scraping & automation using Python
 
-Normal Equation
+---
 
-Gradient Descent
+## 🧰 Tools & Libraries Used
+- Python 3.x
+- NumPy, Pandas
+- Scikit-learn
+- Matplotlib & Seaborn
+- BeautifulSoup, Selenium
+- Jupyter / Spyder IDE
 
-5-Fold Cross Validation
+---
 
-Evaluation using R² Score
+## ✍️ Author
+**Mehak**  
+B.Tech – Computer Engineering (3rd Year)  
+**Thapar Institute of Engineering and Technology**  
+📧 *mehakjindal6789@gmail.com*
 
-Principal Component Analysis (PCA) for dimensionality reduction
+---
 
-Comparison of model performance before and after PCA
+## ⭐ Acknowledgement
+This repository is part of the **Machine Learning (UML501)** coursework under the guidance of faculty at TIET, Patiala.
 
-Assignment 4 – Web Scraping and Data Extraction
-
-Objective:
-To extract, clean, and store real-world data using web scraping tools.
-
-Key Tasks:
-
-Using requests and BeautifulSoup for static page scraping
-
-Using selenium for dynamic content extraction
-
-Extracted data from:
-
-BooksToScrape – Book title, price, availability, rating
-
-IMDb – Top 250 movies (title, year, rating)
-
-TimeAndDate – Global weather information
-
-Exported datasets to CSV format for analysis
-
-🧩 TOOLS AND LIBRARIES USED
-
-Python 3.x
-
-NumPy
-
-Pandas
-
-Scikit-learn
-
-BeautifulSoup4
-
-Selenium
-
-Matplotlib
-
-🧠 LEARNING OUTCOMES
-
-By completing these assignments, I have:
-
-Understood and applied core concepts of data preprocessing and normalization
-
-Implemented linear regression models from scratch and using libraries
-
-Practiced model validation techniques and performance metrics
-
-Gained hands-on experience with dimensionality reduction (PCA)
-
-Developed skills in web scraping and automated data collection
-
-🧾 CONCLUSION
-
-These assignments collectively provide a comprehensive understanding of foundational Machine Learning workflows — from data preprocessing to model evaluation.
-They have strengthened my analytical and programming abilities essential for real-world ML applications.
-
-✍️ AUTHOR
-
-Mehak 
-B.Tech – Computer Engineering (3rd Year)
-📍 Thapar Institute of Engineering and Technology
-📧 mehakjindal6789@gmail.com
+---
